@@ -7,8 +7,8 @@
     <script>
         // 1. COOKIE SIMPLU (set test2)
         function setCookie() {
-            document.cookie = "test2=triple"; path=/";
-            show("Cookie setat: test2=triple");
+            document.cookie = "name=ceci"; path=/";
+            show("Cookie setat: name=ceci");
         }
 
         // 2. AFIȘEAZĂ TOATE COOKIE-URILE
@@ -34,8 +34,8 @@
 
         // 4. ȘTERGERE COOKIE
         function deleteCookie() {
-            document.cookie = "test2=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
-            show("Cookie 'test2' șters");
+            document.cookie = "name=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+            show("Cookie 'name' șters");
         }
 
         // AFIȘARE ÎN PAGINĂ
@@ -85,7 +85,7 @@
 <!-- 1 -->
 <section>
     <h3>1. Cookie Simplu</h3>
-    <button onclick="setCookie()">Set test2=triple</button>
+    <button onclick="setCookie()">Set name=ceci</button>
 </section>
 
 <!-- 2 -->
@@ -97,14 +97,14 @@
 <!-- 3 -->
 <section>
     <h3>3. Cookie specific</h3>
-    <input id="cookieName" placeholder="Nume cookie (ex: test2)">
+    <input id="cookieName" placeholder="Nume cookie (ex: name)">
     <button onclick="searchCookie()">Caută</button>
 </section>
 
 <!-- 4 -->
 <section>
     <h3>4. Ștergere Cookie</h3>
-    <button onclick="deleteCookie()">Șterge 'test2'</button>
+    <button onclick="deleteCookie()">Șterge 'name'</button>
 </section>
 
 
