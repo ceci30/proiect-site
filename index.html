@@ -2,67 +2,91 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>cookie </title>
+    <title>Cookies Lab</title>
 
     <script>
-        //  2 cookies inițiale
+        // 2 cookies inițiale
         document.cookie = "session=test_GDPR";
         document.cookie = "favorite_task=collect_Data";
 
-        //  1. cookie simplu
-        function setSimpleCookie() {
-            document.cookie = "username=CeciEmi";
-            alert("Cookie simplu!");
+        // afișare pe pagină
+        function showOutput(text) {
+            document.getElementById("output").innerText = text;
         }
 
-        // mai multe cookie-uri
+        // cookie simplu
+        function setSimpleCookie() {
+            document.cookie = "username=CeciEmi";
+            showOutput("Cookie simplu setat: username");
+        }
+
+        // multiple cookies
         function setMultipleCookies() {
             document.cookie = "session=active";
             document.cookie = "theme=dark";
             document.cookie = "language=ro";
-            alert("Mai multe cookie-uri!");
+            showOutput("Mai multe cookie-uri setate");
         }
 
-        // afișare cookie-uri
+        // afișare cookies
         function alertCookie() {
-            alert("Cookie-uri curente:\n" + document.cookie);
+            showOutput("Cookies: " + document.cookie);
         }
 
         // ștergere cookie
         function deleteCookie() {
             document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
-            alert("Cookie șters!");
+            showOutput("Cookie username șters");
         }
 
-        // test în consolă
-     function testCookies() {
-    alert(document.cookie);
+        // test cookies
+        function testCookies() {
+            showOutput("Test cookies: " + document.cookie);
         }
 
-        // 6. cookie cu expirare
+        // cookie cu expirare
         function setCookieWithExpiry() {
             let date = new Date();
-            date.setTime(date.getTime() + (60 * 60 * 1000)); // 1 oră
+            date.setTime(date.getTime() + (60 * 60 * 1000));
 
             document.cookie = "tempCookie=hello; expires=" + date.toUTCString() + "; path=/";
-            alert("Cookie cu expirare!");
+            showOutput("Cookie cu expirare setat");
         }
     </script>
+
+    <style>
+        body {
+            font-family: Arial;
+            padding: 20px;
+        }
+        button {
+            margin: 5px;
+        }
+        #output {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            min-height: 20px;
+            background: #f9f9f9;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Bine ai venit la laborator</h1>
 
+    <h1>Bine ai venit la laborator</h1>
 
     <button onclick="alertCookie()">Show cookies</button>
 
     <hr>
 
-    <!-- EXEMPLE MDN -->
     <button onclick="setSimpleCookie()">Set simple cookie</button>
     <button onclick="setMultipleCookies()">Set multiple cookies</button>
     <button onclick="setCookieWithExpiry()">Set cookie with expiry</button>
     <button onclick="deleteCookie()">Delete cookie</button>
     <button onclick="testCookies()">Test cookies</button>
+
+    <div id="output"></div>
+
 </body>
 </html>
