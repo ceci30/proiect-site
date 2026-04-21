@@ -3,93 +3,114 @@
 <head>
 <meta charset="UTF-8">
 <title>Cookie</title>
+
 <style>
-        body { font-family: sans-serif; line-height: 1.6; padding: 20px; }
-        .section { border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; border-radius: 5px; }
-        button { cursor: pointer; padding: 5px 10px; }
+body {
+    font-family: sans-serif;
+    padding: 20px;
+    margin-top: 60px;
+}
+
+/* Banner sus */
+#banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Secțiuni */
+.section {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+button {
+    padding: 6px 10px;
+    cursor: pointer;
+}
 </style>
+
 </head>
+
 <body>
 
- 
+<div id="banner">Mesaje...</div>
 
-    <h1>Imp</h1>
+<h1>Cookies</h1>
 
- 
-
-    <div class="section">
-<h3>1.Cookie Simplu</h3>
+<div class="section">
+<h3>1. Cookie Simplu</h3>
 <button onclick="createSimpleCookie()">Set nume=ceci</button>
 </div>
 
- 
-
-    <div class="section">
-<h3>2.Toate Cookie-urile</h3>
-<button onclick="showAllCookies()">Afișează document.cookie</button>
+<div class="section">
+<h3>2. Toate Cookie-urile</h3>
+<button onclick="showAllCookies()">Afișează</button>
 <p id="cookieDisplay" style="color: blue;"></p>
 </div>
 
- 
-
-    <div class="section">
-<h3>3.Cookie specific</h3>
-<input type="text" id="cookieName" placeholder="Nume cookie (ex: nume)">
+<div class="section">
+<h3>3. Cookie specific</h3>
+<input type="text" id="cookieName" placeholder="ex: nume">
 <button onclick="getSpecificCookie()">Caută</button>
 </div>
 
- 
-
-    <div class="section">
-<h3>4.Ștergere Cookie</h3>
+<div class="section">
+<h3>4. Ștergere Cookie</h3>
 <button onclick="deleteCookie()">Șterge 'nume'</button>
 </div>
 
- 
+<script>
 
-    <script>
-  
+// 🔔 Banner
+function show(msg) {
+    document.getElementById("banner").innerText = msg;
+}
 
-        // A. Creare (Write)
-        function createSimpleCookie() {
-            document.cookie = "nume=ceci";
-            alert("Cookie 'test2' a fost creat!");
-        }
+// ✅ CREATE (corect)
+function createSimpleCookie() {
+    document.cookie = "nume=ceci; path=/";
+    show("Cookie 'nume=ceci' creat");
+}
 
- 
+// ✅ SHOW ALL
+function showAllCookies() {
+    let cookies = document.cookie;
+    document.getElementById("cookieDisplay").innerText =
+        cookies || "Nu există cookie-uri";
+}
 
-        // B. Afișare
-        function showAllCookies() {
-            const allCookies = document.cookie;
-            document.getElementById('cookieDisplay').innerText = allCookies || "Niciun cookie găsit.";
-        }
+// ✅ GET SPECIFIC
+function getSpecificCookie() {
+    let name = document.getElementById("cookieName").value;
 
- 
+    let value = document.cookie
+        .split("; ")
+        .find(row => row.startsWith(name + "="))
+        ?.split("=")[1];
 
-        // C. Citirea unui cookie specific (Exemplu MDN folosind .match())
-        function getSpecificCookie() {
-            const name = document.getElementById('cookieName').value;
-            const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-            if (match) {
-                alert("Valoarea pentru " + name + " este: " + match[2]);
-            } else {
-                alert("Cookie-ul nu a fost găsit.");
-            }
-        }
+    if (value) {
+        show("Găsit: " + name + " = " + value);
+    } else {
+        show("Cookie-ul nu există");
+    }
+}
 
- 
+// ✅ DELETE (CORECT 100%)
+function deleteCookie() {
+    document.cookie = "nume=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+    show("Cookie 'nume' șters");
+}
 
-        // D. Ștergere (Setare dată în trecut)
-        function deleteCookie() {
-            document.cookie = "nume; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-            alert("Cookie 'nume' a fost șters!");
-        }
-
- 
-        document.cookie = "do_something_only_once=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=Lax";
 </script>
-
- 
 
 </body>
 </html>
