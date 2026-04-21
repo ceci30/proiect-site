@@ -1,63 +1,68 @@
-<body>
-    <h1>Bine ai venit la laborator</h1>
-
-    <button onclick="alertCookie()">Show cookies</button>
-
-    <script>
-        document.cookie = "session=test_GDPR";
-        document.cookie = "favorite_task=collect_Data";
-
-        function alertCookie() {
-            alert(document.cookie);
-        }
-    </script>
-</body>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Cookie Demo - MDN</title>
+    <title>Document.cookie - MDN Complete Lab</title>
 
     <script>
-        // 🔹 1. setare cookie simplu
+        // 🔹 CERINȚA PROFESORULUI: 2 cookies inițiale
+        document.cookie = "session=test_GDPR";
+        document.cookie = "favorite_task=collect_Data";
+
+        // 🔹 1. cookie simplu (MDN)
         function setSimpleCookie() {
             document.cookie = "username=CeciEmi";
-            alert("Cookie setat!");
+            alert("Cookie simplu setat!");
         }
 
-        // 🔹 2. citire cookie-uri
-        function showCookies() {
-            alert("Cookie-uri curente:\n" + document.cookie);
-        }
-
-        // 🔹 3. adăugare mai multe cookie-uri
+        // 🔹 2. mai multe cookie-uri (MDN)
         function setMultipleCookies() {
             document.cookie = "session=active";
             document.cookie = "theme=dark";
             document.cookie = "language=ro";
-            alert("Mai multe cookie-uri au fost setate!");
+            alert("Mai multe cookie-uri setate!");
         }
 
-        // 🔹 4. ștergere cookie (prin expirare)
+        // 🔹 3. afișare cookie-uri (CERINȚA + MDN)
+        function alertCookie() {
+            alert("Cookie-uri curente:\n" + document.cookie);
+        }
+
+        // 🔹 4. ștergere cookie (MDN)
         function deleteCookie() {
-            document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+            document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
             alert("Cookie șters!");
         }
 
-        // 🔹 5. verificare rapidă
+        // 🔹 5. test în consolă (MDN)
         function testCookies() {
             console.log(document.cookie);
             alert("Verifică consola (F12)");
+        }
+
+        // 🔹 6. cookie cu expirare (MDN important)
+        function setCookieWithExpiry() {
+            let date = new Date();
+            date.setTime(date.getTime() + (60 * 60 * 1000)); // 1 oră
+
+            document.cookie = "tempCookie=hello; expires=" + date.toUTCString() + "; path=/";
+            alert("Cookie cu expirare setat!");
         }
     </script>
 </head>
 
 <body>
-    <h1>Document.cookie - MDN Examples</h1>
+    <h1>Bine ai venit la laborator - Cookies MDN</h1>
 
+    <!-- CERINȚA -->
+    <button onclick="alertCookie()">Show cookies (cerință)</button>
+
+    <hr>
+
+    <!-- EXEMPLE MDN -->
     <button onclick="setSimpleCookie()">Set simple cookie</button>
     <button onclick="setMultipleCookies()">Set multiple cookies</button>
-    <button onclick="showCookies()">Show cookies</button>
+    <button onclick="setCookieWithExpiry()">Set cookie with expiry</button>
     <button onclick="deleteCookie()">Delete cookie</button>
     <button onclick="testCookies()">Test cookies (console)</button>
 </body>
