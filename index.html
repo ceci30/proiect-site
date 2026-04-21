@@ -1,0 +1,14 @@
+<body>
+    <h1>Bine ai venit la laborator</h1>
+
+    <button onclick="alertCookie()">Show cookies</button>
+
+    <script>
+        document.cookie = "session=test_GDPR";
+        document.cookie = "favorite_task=collect_Data";
+
+        function alertCookie() {
+            alert(document.cookie);
+        }
+    </script>
+</body>
