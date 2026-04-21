@@ -5,52 +5,42 @@
     <title>Cookies Lab</title>
 
     <script>
-        // 2 cookies inițiale
-        document.cookie = "session=test_GDPR";
-        document.cookie = "favorite_task=collect_Data";
-
-        // afișare pe pagină
-        function showOutput(text) {
-            document.getElementById("output").innerText = text;
+        // 1. COOKIE SIMPLU (set test2)
+        function setCookie() {
+            document.cookie = "test2=triple";
+            show("Cookie setat: test2=triple");
         }
 
-        // cookie simplu
-        function setSimpleCookie() {
-            document.cookie = "username=CeciEmi";
-            showOutput("Cookie simplu setat: username");
+        // 2. AFIȘEAZĂ TOATE COOKIE-URILE
+        function showAllCookies() {
+            show("Toate cookie-urile:<br>" + document.cookie);
         }
 
-        // multiple cookies
-        function setMultipleCookies() {
-            document.cookie = "session=active";
-            document.cookie = "theme=dark";
-            document.cookie = "language=ro";
-            showOutput("Mai multe cookie-uri setate");
+        // 3. CAUTĂ COOKIE SPECIFIC
+        function searchCookie() {
+            let name = document.getElementById("cookieName").value;
+
+            let cookieValue = document.cookie
+                .split("; ")
+                .find(row => row.startsWith(name + "="))
+                ?.split("=")[1];
+
+            if (cookieValue) {
+                show("Cookie găsit: " + name + " = " + cookieValue);
+            } else {
+                show("Cookie-ul nu există");
+            }
         }
 
-        // afișare cookies
-        function alertCookie() {
-            showOutput("Cookies: " + document.cookie);
-        }
-
-        // ștergere cookie
+        // 4. ȘTERGERE COOKIE
         function deleteCookie() {
-            document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
-            showOutput("Cookie username șters");
+            document.cookie = "test2=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+            show("Cookie 'test2' șters");
         }
 
-        // test cookies
-        function testCookies() {
-            showOutput("Test cookies: " + document.cookie);
-        }
-
-        // cookie cu expirare
-        function setCookieWithExpiry() {
-            let date = new Date();
-            date.setTime(date.getTime() + (60 * 60 * 1000));
-
-            document.cookie = "tempCookie=hello; expires=" + date.toUTCString() + "; path=/";
-            showOutput("Cookie cu expirare setat");
+        // AFIȘARE ÎN PAGINĂ
+        function show(text) {
+            document.getElementById("output").innerHTML = text;
         }
     </script>
 
@@ -59,34 +49,64 @@
             font-family: Arial;
             padding: 20px;
         }
-        button {
-            margin: 5px;
+
+        section {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
         }
+
+        button {
+            margin-top: 8px;
+            padding: 6px 10px;
+        }
+
+        input {
+            padding: 6px;
+            margin-top: 5px;
+        }
+
         #output {
             margin-top: 20px;
             padding: 10px;
-            border: 1px solid #ccc;
-            min-height: 20px;
-            background: #f9f9f9;
+            border: 1px solid #999;
+            background: #f5f5f5;
         }
     </style>
 </head>
 
 <body>
 
-    <h1>Bine ai venit la laborator</h1>
+<h1>Imp - Cookies</h1>
 
-    <button onclick="alertCookie()">Show cookies</button>
+<!-- 1 -->
+<section>
+    <h3>1. Cookie Simplu</h3>
+    <button onclick="setCookie()">Set test2=triple</button>
+</section>
 
-    <hr>
+<!-- 2 -->
+<section>
+    <h3>2. Toate Cookie-urile</h3>
+    <button onclick="showAllCookies()">Afișează document.cookie</button>
+</section>
 
-    <button onclick="setSimpleCookie()">Set simple cookie</button>
-    <button onclick="setMultipleCookies()">Set multiple cookies</button>
-    <button onclick="setCookieWithExpiry()">Set cookie with expiry</button>
-    <button onclick="deleteCookie()">Delete cookie</button>
-    <button onclick="testCookies()">Test cookies</button>
+<!-- 3 -->
+<section>
+    <h3>3. Cookie specific</h3>
+    <input id="cookieName" placeholder="Nume cookie (ex: test2)">
+    <button onclick="searchCookie()">Caută</button>
+</section>
 
-    <div id="output"></div>
+<!-- 4 -->
+<section>
+    <h3>4. Ștergere Cookie</h3>
+    <button onclick="deleteCookie()">Șterge 'test2'</button>
+</section>
+
+<!-- OUTPUT -->
+<div id="output"></div>
 
 </body>
 </html>
