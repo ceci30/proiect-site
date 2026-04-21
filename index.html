@@ -12,3 +12,53 @@
         }
     </script>
 </body>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Cookie Demo - MDN</title>
+
+    <script>
+        // 🔹 1. setare cookie simplu
+        function setSimpleCookie() {
+            document.cookie = "username=CeciEmi";
+            alert("Cookie setat!");
+        }
+
+        // 🔹 2. citire cookie-uri
+        function showCookies() {
+            alert("Cookie-uri curente:\n" + document.cookie);
+        }
+
+        // 🔹 3. adăugare mai multe cookie-uri
+        function setMultipleCookies() {
+            document.cookie = "session=active";
+            document.cookie = "theme=dark";
+            document.cookie = "language=ro";
+            alert("Mai multe cookie-uri au fost setate!");
+        }
+
+        // 🔹 4. ștergere cookie (prin expirare)
+        function deleteCookie() {
+            document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+            alert("Cookie șters!");
+        }
+
+        // 🔹 5. verificare rapidă
+        function testCookies() {
+            console.log(document.cookie);
+            alert("Verifică consola (F12)");
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Document.cookie - MDN Examples</h1>
+
+    <button onclick="setSimpleCookie()">Set simple cookie</button>
+    <button onclick="setMultipleCookies()">Set multiple cookies</button>
+    <button onclick="showCookies()">Show cookies</button>
+    <button onclick="deleteCookie()">Delete cookie</button>
+    <button onclick="testCookies()">Test cookies (console)</button>
+</body>
+</html>
