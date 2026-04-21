@@ -1,113 +1,95 @@
 <!DOCTYPE html>
-<html>
+<html lang="ro">
 <head>
-    <meta charset="UTF-8">
-    <title>Cookies Lab</title>
-
-    <script>
-        // 1. COOKIE SIMPLU (set test2)
-        function setCookie() {
-            document.cookie = "name=ceci"; path=/";
-            show("Cookie setat: name=ceci");
-        }
-
-        // 2. AFIȘEAZĂ TOATE COOKIE-URILE
-        function showAllCookies() {
-            show("Toate cookie-urile:<br>" + document.cookie);
-        }
-
-        // 3. CAUTĂ COOKIE SPECIFIC
-        function searchCookie() {
-            let name = document.getElementById("cookieName").value;
-
-            let cookieValue = document.cookie
-                .split("; ")
-                .find(row => row.startsWith(name + "="))
-                ?.split("=")[1];
-
-            if (cookieValue) {
-                show("Cookie găsit: " + name + " = " + cookieValue);
-            } else {
-                show("Cookie-ul nu există");
-            }
-        }
-
-        // 4. ȘTERGERE COOKIE
-        function deleteCookie() {
-            document.cookie = "name=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
-            show("Cookie 'name' șters");
-        }
-
-        // AFIȘARE ÎN PAGINĂ
-        function show(text) {
-            document.getElementById("output").innerHTML = text;
-        }
-    </script>
-
-    <style>
-        body {
-            font-family: Arial;
-            padding: 20px;
-        }
-
-        section {
-            border: 1px solid #ccc;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-        }
-
-        button {
-            margin-top: 8px;
-            padding: 6px 10px;
-        }
-
-        input {
-            padding: 6px;
-            margin-top: 5px;
-        }
-
-        #output {
-            margin-top: 20px;
-            padding: 10px;
-            border: 1px solid #999;
-            background: #f5f5f5;
-        }
-    </style>
+<meta charset="UTF-8">
+<title>Cookie</title>
+<style>
+        body { font-family: sans-serif; line-height: 1.6; padding: 20px; }
+        .section { border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; border-radius: 5px; }
+        button { cursor: pointer; padding: 5px 10px; }
+</style>
 </head>
-
 <body>
-    <!-- OUTPUT -->
-<div id="output"></div>
 
-<h1>Imp - Cookies</h1>
+ 
 
-<!-- 1 -->
-<section>
-    <h3>1. Cookie Simplu</h3>
-    <button onclick="setCookie()">Set name=ceci</button>
-</section>
+    <h1>Imp</h1>
 
-<!-- 2 -->
-<section>
-    <h3>2. Toate Cookie-urile</h3>
-    <button onclick="showAllCookies()">Afișează document.cookie</button>
-</section>
+ 
 
-<!-- 3 -->
-<section>
-    <h3>3. Cookie specific</h3>
-    <input id="cookieName" placeholder="Nume cookie (ex: name)">
-    <button onclick="searchCookie()">Caută</button>
-</section>
+    <div class="section">
+<h3>1.Cookie Simplu</h3>
+<button onclick="createSimpleCookie()">Set nume=ceci</button>
+</div>
 
-<!-- 4 -->
-<section>
-    <h3>4. Ștergere Cookie</h3>
-    <button onclick="deleteCookie()">Șterge 'name'</button>
-</section>
+ 
 
+    <div class="section">
+<h3>2.Toate Cookie-urile</h3>
+<button onclick="showAllCookies()">Afișează document.cookie</button>
+<p id="cookieDisplay" style="color: blue;"></p>
+</div>
 
+ 
+
+    <div class="section">
+<h3>3.Cookie specific</h3>
+<input type="text" id="cookieName" placeholder="Nume cookie (ex: nume)">
+<button onclick="getSpecificCookie()">Caută</button>
+</div>
+
+ 
+
+    <div class="section">
+<h3>4.Ștergere Cookie</h3>
+<button onclick="deleteCookie()">Șterge 'nume'</button>
+</div>
+
+ 
+
+    <script>
+  
+
+        // A. Creare (Write)
+        function createSimpleCookie() {
+            document.cookie = "nume=ceci";
+            alert("Cookie 'test2' a fost creat!");
+        }
+
+ 
+
+        // B. Afișare
+        function showAllCookies() {
+            const allCookies = document.cookie;
+            document.getElementById('cookieDisplay').innerText = allCookies || "Niciun cookie găsit.";
+        }
+
+ 
+
+        // C. Citirea unui cookie specific (Exemplu MDN folosind .match())
+        function getSpecificCookie() {
+            const name = document.getElementById('cookieName').value;
+            const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+            if (match) {
+                alert("Valoarea pentru " + name + " este: " + match[2]);
+            } else {
+                alert("Cookie-ul nu a fost găsit.");
+            }
+        }
+
+ 
+
+        // D. Ștergere (Setare dată în trecut)
+        function deleteCookie() {
+            document.cookie = "nume; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            alert("Cookie 'nume' a fost șters!");
+        }
+
+ 
+        document.cookie = "do_something_only_once=true; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=Lax";
+</script>
+
+ 
 
 </body>
 </html>
